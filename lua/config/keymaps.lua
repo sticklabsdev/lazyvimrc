@@ -83,21 +83,24 @@ vim.keymap.set(
   ":tabe C:/Users/b.grissom/OneDrive - ELATEC Cloud Global/Documents/notes_new_laptop.md<CR>",
   { desc = "Open my notes" }
 )
+
+-- BAG Orig: ":tabe C:/Users/b.grissom/AppData/Local/nvim/lua/theprimeagen/lazy/<CR>",
 vim.keymap.set(
   "n",
   "<leader>nvim",
-  ":tabe C:/Users/b.grissom/AppData/Local/nvim/lua/theprimeagen/lazy/<CR>",
+  ":tabe C:/Users/b.grissom/AppData/Local/nvim/README.md<CR>",
   { desc = "Open neovim config dir" }
 )
 
 -- Turn off auto completion
-vim.g.cmp_enabled = true
-vim.api.nvim_set_keymap("n", "<leader>noauto", [[:lua ToggleCmp()<CR>]], { noremap = true, silent = true })
-function ToggleCmp()
-  vim.g.cmp_enabled = not vim.g.cmp_enabled
-  require("cmp").setup.buffer({ enabled = vim.g.cmp_enabled })
-  print("Completion " .. (vim.g.cmp_enabled and "enabled" or "disabled"))
-end
+-- BAG: Doesn't work
+-- vim.g.cmp_enabled = true
+-- vim.api.nvim_set_keymap("n", "<leader>noauto", [[:lua ToggleCmp()<CR>]], { noremap = true, silent = true })
+-- function ToggleCmp()
+--   vim.g.cmp_enabled = not vim.g.cmp_enabled
+--   require("cmp").setup.buffer({ enabled = vim.g.cmp_enabled })
+--   print("Completion " .. (vim.g.cmp_enabled and "enabled" or "disabled"))
+-- end
 -- -----------------------------------------------
 --              end BAG KEYMAPS
 -- -----------------------------------------------
