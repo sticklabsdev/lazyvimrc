@@ -10,7 +10,7 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 --                  BAG KEYMAPS
 -- -----------------------------------------------
 -- vim.keymap.set("n", "<leader>viam", vim.cmd.Ex)
-vim.keymap.set("n", "<leader>viam", ":tabe .<CR>")
+-- vim.keymap.set("n", "<leader>viam", ":tabe .<CR>")
 vim.keymap.set("n", "<leader>tabe", ":tabe<CR>")
 vim.keymap.set("n", "<leader>tele", ":Telescope<CR>")
 vim.keymap.set("n", "<leader>psh", ":!start powershell<CR>")
@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd("WinNew", {
 -- Visual macro for searching in current file
 -- :vmap T y:vim /<C-R>"/ <C-R>%<CR>:cw<CR>/<C-R>"<CR>
 -- vim.keymap.set("n", "<leader>search", [[y:vim /<C-R>"/ <C-R>%<CR>:cw<CR>/<C-R>"<CR>]])
-vim.keymap.set("n", "<leader>search", [[y:vim /<C-R>"/ <C-R>%<CR>:cw<CR>/<C-R>"<CR>]])
+vim.keymap.set("v", "<leader>search", [[y:vim /<C-R>"/ <C-R>%<CR>:cw<CR>/<C-R>"<CR>]])
 
 -- vim.keymap.set('v', '<leader>search', function()
 --   -- Yank the visual selection
