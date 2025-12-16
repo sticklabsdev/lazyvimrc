@@ -9,6 +9,8 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 -- -----------------------------------------------
 --                  BAG KEYMAPS
 -- -----------------------------------------------
+vim.keymap.set("t", "<C-t>", [[<C-\><C-n>]], { noremap = true })
+
 -- vim.keymap.set("n", "<leader>viam", vim.cmd.Ex)
 -- vim.keymap.set("n", "<leader>viam", ":tabe .<CR>")
 vim.keymap.set("n", "<leader>tabe", ":tabe<CR>")
