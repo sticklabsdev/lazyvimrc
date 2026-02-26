@@ -1,12 +1,14 @@
 return {
   "folke/snacks.nvim",
-  opts = {
-    picker = {
-      formatters = {
-        file = {
-          filename_first = true, -- show filename before the path
-        },
-      },
+  keys = {
+    {
+      "<leader>,",
+      function()
+        Snacks.picker.buffers({
+          formatters = { file = { filename_first = true } },
+        })
+      end,
+      desc = "Buffers",
     },
   },
 }
