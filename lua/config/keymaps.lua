@@ -54,6 +54,23 @@ vim.api.nvim_create_autocmd("WinNew", {
   end,
 })
 
+
+-- Toggle the vertical indentation lines
+vim.keymap.set("n", "<leader>lines", function()
+  local ok, indent = pcall(require, "snacks.indent")
+  if not ok then return end
+
+  if vim.g.snacks_indent_disabled then
+    indent.enable()
+    vim.g.snacks_indent_disabled = false
+  else
+    indent.disable()
+    vim.g.snacks_indent_disabled = true
+  end
+end, { desc = "Toggle indent guides" })
+
+
+
 -- Visual macro for searching in current file
 -- :vmap T y:vim /<C-R>"/ <C-R>%<CR>:cw<CR>/<C-R>"<CR>
 -- vim.keymap.set("n", "<leader>search", [[y:vim /<C-R>"/ <C-R>%<CR>:cw<CR>/<C-R>"<CR>]])
