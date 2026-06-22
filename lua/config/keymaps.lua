@@ -2,24 +2,17 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- BAG Allows you to copy to the system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
-
 -- -----------------------------------------------
 --                  BAG KEYMAPS
 -- -----------------------------------------------
+-- BAG Allows you to copy to the system clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("t", "<C-t>", [[<C-\><C-n>]], { noremap = true })
-
--- vim.keymap.set("n", "<leader>viam", vim.cmd.Ex)
--- vim.keymap.set("n", "<leader>viam", ":tabe .<CR>")
-vim.keymap.set("n", "<leader>tabe", ":tabe<CR>")
 vim.keymap.set("n", "<leader>tele", ":Telescope<CR>")
 vim.keymap.set("n", "<leader>psh", ":!start powershell<CR>")
-vim.keymap.set("n", ",n", ":tabn<CR>")
-vim.keymap.set("n", ",b", ":tabp<CR>")
--- BAG doesn't work, I wanted to remap "ma" to "mf" in netrw
--- vim.keymap.set("n", "ma", "mf")
+vim.keymap.set('n', '<leader>bn', '<cmd>BufferLineMoveNext<cr>')
+vim.keymap.set('n', '<leader>bp', '<cmd>BufferLineMovePrev<cr>')
 
 -- BAG Set search highlight color
 vim.cmd("highlight Search guibg=#CCCC00 guifg=black")
