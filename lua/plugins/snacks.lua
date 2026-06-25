@@ -49,6 +49,23 @@ return {
         end,
         desc = "Grep (cwd)",
       },
+      {
+        "<leader>fR",
+        function()
+          Snacks.picker.recent({
+            filter = { cwd = true },
+            formatters = { file = { filename_first = true } },
+          })
+        end,
+        desc = "Recent (cwd)",
+      },
+      {
+        "<leader>sR",
+        function()
+          Snacks.picker.resume()
+        end,
+        desc = "Resume",
+      },
     },
   },
   {
@@ -60,6 +77,8 @@ return {
       { "<leader>fF", false },
       { "<leader>sg", false },
       { "<leader>sG", false },
+      { "<leader>fR", false },
+      { "<leader>sR", false },
     },
   },
 }
