@@ -50,6 +50,27 @@ return {
         desc = "Grep (cwd)",
       },
       {
+        "<leader>sw",
+        function()
+          Snacks.picker.grep_word({
+            formatters = { file = { filename_first = true } },
+          })
+        end,
+        desc = "Visual selection or word (Root Dir)",
+        mode = { "n", "x" },
+      },
+      {
+        "<leader>sW",
+        function()
+          Snacks.picker.grep_word({
+            root = false,
+            formatters = { file = { filename_first = true } },
+          })
+        end,
+        desc = "Visual selection or word (cwd)",
+        mode = { "n", "x" },
+      },
+      {
         "<leader>fR",
         function()
           Snacks.picker.recent({
@@ -77,6 +98,8 @@ return {
       { "<leader>fF", false },
       { "<leader>sg", false },
       { "<leader>sG", false },
+      { "<leader>sw", false },
+      { "<leader>sW", false },
       { "<leader>fR", false },
       { "<leader>sR", false },
     },

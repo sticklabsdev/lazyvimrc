@@ -14,6 +14,21 @@ vim.keymap.set("n", "<leader>psh", ":!start powershell<CR>")
 vim.keymap.set('n', '<leader>bn', '<cmd>BufferLineMoveNext<cr>')
 vim.keymap.set('n', '<leader>bp', '<cmd>BufferLineMovePrev<cr>')
 
+-- Kill LazyVim's default <leader>e (remaps to <leader>fe Explorer). It's a
+-- complete mapping on its own, so it fires before "t" lands and races with
+-- mini-files.lua's <leader>et/<leader>eT. This file loads after LazyVim's
+-- core keymaps (VeryLazy), so the del sticks.
+pcall(vim.keymap.del, "n", "<leader>e")
+
+-- Kill LazyVim's default <A-j>/<A-k> "Move Line" mappings. Terminals encode
+-- Alt+key as ESC followed by the key byte -- identical bytes to a fast
+-- manual Esc-then-j/k -- so nvim would swap lines whenever Esc was pressed
+-- quickly before j/k. Removing the mapping removes the ambiguity entirely.
+for _, mode in ipairs({ "n", "v", "i" }) do
+  pcall(vim.keymap.del, mode, "<A-j>")
+  pcall(vim.keymap.del, mode, "<A-k>")
+end
+
 -- BAG Set search highlight color
 vim.cmd("highlight Search guibg=#CCCC00 guifg=black")
 vim.cmd("highlight IncSearch guibg=yellow guifg=blue")
