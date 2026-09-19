@@ -6,3 +6,5 @@ vim.g.autoformat = false -- Don't autoformat!
 
 vim.opt.conceallevel = 0  -- Don't hide backticks etc. in .md files
 -- vim.opt.concealcursor = ""  -- Not sure what this does
+
+vim.opt.relativenumber = false -- Show absolute line numbers instead of relative

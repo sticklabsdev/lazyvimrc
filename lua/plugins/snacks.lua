@@ -1,3 +1,22 @@
+-- Sort the buffer picker to match the reverse of bufferline's tab order (same order H/L cycle through)
+local function buffers_in_bufferline_order(opts, ctx)
+  local items = require("snacks.picker.source.buffers").buffers(opts, ctx)
+  local ok, bufferline = pcall(require, "bufferline")
+  if not ok then return items end
+  local order = {}
+  for i, elem in ipairs(bufferline.get_elements().elements) do
+    order[elem.id] = i
+  end
+  table.sort(items, function(a, b)
+    local oa, ob = order[a.buf], order[b.buf]
+    if oa and ob then return oa > ob end
+    if oa then return true end
+    if ob then return false end
+    return a.buf > b.buf
+  end)
+  return items
+end
+
 return {
   {
     "folke/snacks.nvim",
@@ -5,8 +24,20 @@ return {
       {
         "<leader>,",
         function()
+          local origin_buf = vim.api.nvim_get_current_buf()
           Snacks.picker.buffers({
+            sort_lastused = false,
+            finder = buffers_in_bufferline_order,
             formatters = { file = { filename_first = true } },
+            on_show = function(picker)
+              for i, item in ipairs(picker:items()) do
+                if item.buf == origin_buf then
+                  picker.list:view(i)
+                  Snacks.picker.actions.list_scroll_center(picker)
+                  break
+                end
+              end
+            end,
           })
         end,
         desc = "Buffers",

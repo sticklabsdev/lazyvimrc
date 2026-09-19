@@ -14,6 +14,16 @@ vim.keymap.set("n", "<leader>psh", ":!start powershell<CR>")
 vim.keymap.set('n', '<leader>bn', '<cmd>BufferLineMoveNext<cr>')
 vim.keymap.set('n', '<leader>bp', '<cmd>BufferLineMovePrev<cr>')
 
+-- bufferline has no "move to end"/"move to start" command, but move_to()
+-- accepts negative indices (-1 = last position), so this moves in one call.
+vim.keymap.set('n', '<leader>bL', function()
+  require('bufferline').move_to(-1)
+end, { desc = 'Move buffer to end' })
+
+vim.keymap.set('n', '<leader>bH', function()
+  require('bufferline').move_to(1)
+end, { desc = 'Move buffer to start' })
+
 -- Kill LazyVim's default <leader>e (remaps to <leader>fe Explorer). It's a
 -- complete mapping on its own, so it fires before "t" lands and races with
 -- mini-files.lua's <leader>et/<leader>eT. This file loads after LazyVim's
