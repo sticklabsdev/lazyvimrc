@@ -45,7 +45,10 @@ local function bufferline_order_buffers()
     return a > b
   end)
 
-  local opts = { path_display = filename_first }
+  -- "closest" only honors default_selection_index while the prompt is empty;
+  -- once typing starts, selection tracks the top (best-match) result instead
+  -- of staying pinned to the pre-selected row.
+  local opts = { path_display = filename_first, selection_strategy = "closest" }
   local buffers, default_selection_idx = {}, 1
   for i, bufnr in ipairs(bufnrs) do
     local flag = bufnr == vim.fn.bufnr("") and "%" or (bufnr == vim.fn.bufnr("#") and "#" or " ")
