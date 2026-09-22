@@ -14,14 +14,35 @@ vim.keymap.set("n", "<leader>psh", ":!start powershell<CR>")
 vim.keymap.set('n', '<leader>bn', '<cmd>BufferLineMoveNext<cr>')
 vim.keymap.set('n', '<leader>bp', '<cmd>BufferLineMovePrev<cr>')
 
--- bufferline has no "move to end"/"move to start" command, but move_to()
--- accepts negative indices (-1 = last position), so this moves in one call.
+-- bufferline has no "move to end"/"move to start" command, and move_to()
+-- just swaps the current buffer with whatever's at the target slot rather
+-- than shifting everything else over -- so jumping straight to position 1
+-- or -1 dumps the current occupant of that slot into the current buffer's
+-- old spot instead of sliding the whole list down. move(direction) does the
+-- same swap but only one step at a time, so repeating it shifts correctly.
+local function bufferline_move_to_edge(direction)
+  local elements = require('bufferline').get_elements().elements
+  local current = vim.api.nvim_get_current_buf()
+  local idx
+  for i, elem in ipairs(elements) do
+    if elem.id == current then
+      idx = i
+      break
+    end
+  end
+  if not idx then return end
+  local steps = direction > 0 and (#elements - idx) or (idx - 1)
+  for _ = 1, steps do
+    require('bufferline').move(direction)
+  end
+end
+
 vim.keymap.set('n', '<leader>bL', function()
-  require('bufferline').move_to(-1)
+  bufferline_move_to_edge(1)
 end, { desc = 'Move buffer to end' })
 
 vim.keymap.set('n', '<leader>bH', function()
-  require('bufferline').move_to(1)
+  bufferline_move_to_edge(-1)
 end, { desc = 'Move buffer to start' })
 
 -- Kill LazyVim's default <leader>e (remaps to <leader>fe Explorer). It's a
